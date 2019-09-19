@@ -1,4 +1,4 @@
-package com.ersinceylan.androidchallenge;
+package com.ersinceylan.androidchallenge.model;
 
 public class Product
 {
@@ -10,6 +10,17 @@ public class Product
     private float productPrice;
     private String productState;
     private String summaryPrice;
+
+    public Product(int date, int month, String oderName, String marketName, String orderDetail, float productPrice, String productState, String summaryPrice) {
+        this.date = date;
+        this.month = month;
+        this.oderName = oderName;
+        this.marketName = marketName;
+        this.orderDetail = orderDetail;
+        this.productPrice = productPrice;
+        this.productState = productState;
+        this.summaryPrice = summaryPrice;
+    }
 
     public int getDate() {
         return date;
