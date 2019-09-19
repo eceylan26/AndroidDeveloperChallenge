@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MarketName"
+            android:text="marketname"
             android:textStyle="bold"
             android:id="@+id/marketName"
             android:textColor="@color/colorBlack"
@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OrderName"
+            android:text="ordername"
             android:id="@+id/orderName"
             android:textColor="@color/colorBlack"
             android:layout_marginTop="10dp"/>
@@ -82,7 +82,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="productState"
+                android:text="productstate"
                 android:id="@+id/productState"
                 android:textColor="@color/colorBlack" />
 
@@ -109,7 +109,7 @@
             android:layout_marginRight="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Price"
+            android:text="price"
             android:textStyle="bold"
             android:textColor="@color/colorBlack"
             android:id="@+id/productPrice"
