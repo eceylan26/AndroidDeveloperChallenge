@@ -25,14 +25,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = this.getSharedPreferences("sharedPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
-        if(!sharedPref.getBoolean("rememberMe",false)){
+        if(sharedPref.getBoolean("rememberMe",false)){
+            startActivity(new Intent(this, ProductActivity.class));
+        }
+        else{
             startActivity(new Intent(this, LoginActivity.class));
         }
-        else
-            startActivity(new Intent(this, ProductActivity.class));
 
+        finish();
 
 
     }

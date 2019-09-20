@@ -37,8 +37,8 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        final SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPref.edit();
+        SharedPreferences sharedPref = this.getSharedPreferences("sharedPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         globalSharedPref=sharedPref;
         globalSharedPrefEditor=editor;
     }
@@ -49,9 +49,11 @@ public class LoginActivity extends AppCompatActivity {
         if(checkCredential()){
             Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();
             globalSharedPrefEditor.putBoolean("rememberMe",stateRememberMe());
+            globalSharedPrefEditor.commit();
             errorMessage.setText("*Invalid Credential");
             errorMessage.setVisibility(View.VISIBLE);
             startActivity(new Intent(this, ProductActivity.class));
+            finish();
 
         }
 
