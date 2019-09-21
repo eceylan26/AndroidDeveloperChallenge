@@ -10,25 +10,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
+/**
+ *  UI üzerindeki elemanları daha kolay Javada kullanabilmek için eklenmiştir.
+ */
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * @author Ersin CEYLAN
+ */
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String trueUsername="kariyer";
-    private static final String truePassword="2019ADev";
-
+    /**
+     *  UI elemanlarının XML'den enjekte etmek için tanımlanır
+     */
     @BindView(R.id.username) EditText username;
     @BindView(R.id.password) TextView password;
     @BindView(R.id.rememberme) Switch rememberMe;
     @BindView(R.id.login_button) Button loginButton;
     @BindView(R.id.error_text) TextView errorMessage;
-
-    SharedPreferences globalSharedPref;
-    SharedPreferences.Editor globalSharedPrefEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,29 +39,46 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        SharedPreferences sharedPref = this.getSharedPreferences("sharedPref",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        globalSharedPref=sharedPref;
-        globalSharedPrefEditor=editor;
     }
 
     @OnClick(R.id.login_button)
     public void submit() {
 
+        // Beni hatırla özelliğini tutmak için
+        SharedPreferences sharedPref = this.getSharedPreferences("sharedPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        /**
+         *  Kullanıcı adı ve şifre doğruysa ProductActivity Çalıştırılır ve Beni hatırla özelliğinin
+         *  durumu SharedPreference'a kaydedilir.
+         *  Kullanıcı adı ve şifre yanlış ise error hatası basılır ve EditTextler temizlenir.
+         */
         if(checkCredential()){
-            Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();
-            globalSharedPrefEditor.putBoolean("rememberMe",stateRememberMe());
-            globalSharedPrefEditor.commit();
-            errorMessage.setText("*Invalid Credential");
-            errorMessage.setVisibility(View.VISIBLE);
+            editor.putBoolean("rememberMe",stateRememberMe());
+            editor.apply();
             startActivity(new Intent(this, ProductActivity.class));
             finish();
 
         }
+        else {
+            errorMessage.setText("*Invalid Credential");
+            username.setText("");
+            password.setText("");
+            errorMessage.setVisibility(View.VISIBLE);
+        }
 
     }
 
+    /**
+     * Kullanici adi ve sifre kontrolu yapar
+     *
+     * @return kullanıcı adi ve sifre dogruysa true değilse false
+     *
+     */
     private boolean checkCredential() {
+        final String trueUsername="kariyer";
+        final String truePassword="2019ADev";
+
         if(trueUsername.equals(username.getText().toString()) &&
                 truePassword.equals(password.getText().toString())){
             return true;
@@ -68,6 +87,12 @@ public class LoginActivity extends AppCompatActivity {
             return false;
     }
 
+    /**
+     *
+     * Beni hatırla özelliğinin durumunu döndürür
+     *
+     * @return Ozellik acildiysa true degilse false
+     */
     private boolean stateRememberMe(){
         if(rememberMe.isChecked()){
             return true;
@@ -75,7 +100,5 @@ public class LoginActivity extends AppCompatActivity {
         else
             return false;
     }
-
-
 
 }
