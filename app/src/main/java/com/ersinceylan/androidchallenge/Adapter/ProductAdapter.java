@@ -55,6 +55,13 @@ public class ProductAdapter extends ExpandableRecyclerAdapter<ProductParentViewH
         productChildViewHolder.summaryPrice.setText(productChild.getPrice());
     }
 
+    /**
+     *
+     * Product durumuna göre image ve yazının renginin değişmesini sağlayan fonksiyon
+     *
+     * @param productParentViewHolder parent product xml bilgilerini tutan sınıfı
+     * @param productParent parent product json bilgilerini tutan sınıfı
+     */
     private void changeStatesColor(ProductParentViewHolder productParentViewHolder, ProductParent productParent){
         if(productParent.getProductState().equals("Hazırlanıyor")) {
             productParentViewHolder.productstate.setTextColor(inflater.getContext().getResources().getColor(R.color.colorYellow));
