@@ -3,6 +3,7 @@ package com.ersinceylan.androidchallenge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         ButterKnife.bind(this);
 
     }
@@ -61,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
         else {
-            errorMessage.setText("*Invalid Credential");
+            errorMessage.setText("*Hatalı Kullanıcı Adı ve Şifre");
             username.setText("");
             password.setText("");
             errorMessage.setVisibility(View.VISIBLE);
