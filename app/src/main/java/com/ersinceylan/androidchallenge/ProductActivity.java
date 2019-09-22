@@ -1,9 +1,11 @@
 package com.ersinceylan.androidchallenge;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +37,7 @@ public class ProductActivity extends AppCompatActivity {
     @BindView(R.id.orders) Button buttonOrders;
     @BindView(R.id.logout) Button buttonLogout;
 
+    SharedPreferences sharedPref ;
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -46,25 +49,44 @@ public class ProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         ButterKnife.bind(this);
-
+        sharedPref= this.getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         fetchProductJSON fetchProduct = new fetchProductJSON();
         fetchProduct.execute();
 
         product_recycler.setLayoutManager(new LinearLayoutManager(this));
 
+
+
     }
 
     @OnClick(R.id.logout)
     public void submit() {
-        SharedPreferences sharedPref = this.getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove("rememberMe");
-        editor.putBoolean("rememberMe",false);
-        editor.apply();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Çıkmak istiyor musunuz ?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("İstiyorum", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.remove("rememberMe");
+                editor.putBoolean("rememberMe",false);
+                editor.apply();
+                finish();
+                System.exit(0);
 
+            }
+        });
+
+        builder.setPositiveButton("Hayır", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     public class fetchProductJSON extends AsyncTask<Void, Void, Product[]> {
@@ -192,6 +214,8 @@ public class ProductActivity extends AppCompatActivity {
         return listParentProducts;
 
     }
+
+
 
 
 
