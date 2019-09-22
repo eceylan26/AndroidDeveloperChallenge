@@ -65,7 +65,9 @@
                 android:text="ordername"
                 android:id="@+id/orderName"
                 android:textColor="@color/colorBlack"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
             <LinearLayout
                 android:layout_marginTop="10dp"
