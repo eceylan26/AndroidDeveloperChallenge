@@ -1,11 +1,12 @@
 package com.ersinceylan.androidchallenge.model;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
+/**
+ * Gson kütüpnahesi yardımıyla JSON'dan Class'a map yapma işlemi için kullanılan sınıf
+ * Json bilgilerini tutar
+ */
 public class Product implements Comparable<Product>
 {
     private String date;

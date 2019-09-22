@@ -1,9 +1,11 @@
 package com.ersinceylan.androidchallenge.model;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
-
 import java.util.List;
 
+/**
+ * Rycyclerview içinde bulunan parent cardview'ta gösterilecek bilgilerin tutulduğu sınıf
+ */
 public class ProductParent implements ParentObject {
 
     private String date;

@@ -1,6 +1,8 @@
 package com.ersinceylan.androidchallenge.model;
 
-
+/**
+ * Rycyclerview içinde bulunan parent cardview'e basıldığında açılacak bilgilerin tutulduğu sınıf
+ */
 public class ProductChild {
 
     String orderDetail;

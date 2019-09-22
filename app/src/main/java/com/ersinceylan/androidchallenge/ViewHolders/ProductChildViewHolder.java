@@ -2,11 +2,12 @@ package com.ersinceylan.androidchallenge.ViewHolders;
 
 import android.view.View;
 import android.widget.TextView;
-
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.ersinceylan.androidchallenge.R;
-import com.ersinceylan.androidchallenge.model.ProductDetail;
 
+/**
+ * Recyclerview da bulunan parent componentlerin init edildiği yer
+ */
 public class ProductChildViewHolder extends ChildViewHolder {
 
     public TextView orderDetail;
@@ -18,9 +19,4 @@ public class ProductChildViewHolder extends ChildViewHolder {
         summaryPrice = itemView.findViewById(R.id.summaryPrice);
     }
 
-    public void setChild(ProductDetail productDetail) {
-        this.orderDetail.setText(productDetail.getOrderDetail());
-        this.summaryPrice.setText(productDetail.getSummaryPrice());
-
-    }
 }

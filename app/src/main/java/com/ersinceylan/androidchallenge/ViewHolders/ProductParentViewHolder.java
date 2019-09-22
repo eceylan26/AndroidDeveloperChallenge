@@ -1,12 +1,13 @@
 package com.ersinceylan.androidchallenge.ViewHolders;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 import com.ersinceylan.androidchallenge.R;
-import com.ersinceylan.androidchallenge.model.ProductDetail;
 
+/**
+ * Recyclerview da bulunan parent componentlerin init edildiği yer
+ */
 public class ProductParentViewHolder extends ParentViewHolder {
 
     public TextView date;
@@ -27,17 +28,5 @@ public class ProductParentViewHolder extends ParentViewHolder {
         price = itemView.findViewById(R.id.productPrice);
         status = itemView.findViewById(R.id.status);
     }
-
-    public void setMTextViews(int date, int month, String orderName, String marketName, float productPrice, String productState, ProductDetail productDetail) {
-        this.date.setText(date);
-        this.month.setText(month);
-        this.orderName.setText(orderName);
-        this.marketName.setText(marketName);
-        this.price.setText(Float.toString(productPrice));
-        this.productstate.setText(productState);
-    }
-
-
-
 
 }
