@@ -1,40 +1,54 @@
 package com.ersinceylan.androidchallenge.model;
 
-public class Product
-{
-    private int date;
-    private int month;
-    private String oderName;
-    private String marketName;
-    private String orderDetail;
-    private float productPrice;
-    private String productState;
-    private String summaryPrice;
+import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 
-    public Product(int date, int month, String oderName, String marketName, String orderDetail, float productPrice, String productState, String summaryPrice) {
-        this.date = date;
-        this.month = month;
-        this.oderName = oderName;
-        this.marketName = marketName;
-        this.orderDetail = orderDetail;
-        this.productPrice = productPrice;
-        this.productState = productState;
-        this.summaryPrice = summaryPrice;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+public class Product implements Comparable<Product>
+{
+    private String date;
+    private String month;
+    private String orderName;
+    private String marketName;
+    private String productPrice;
+    private String productState;
+    private ProductDetail productDetail;
+
+    public ProductDetail getProductDetail() {
+        return productDetail;
     }
 
-    public int getDate() {
+    public void setProductDetail(ProductDetail productDetail) {
+        this.productDetail = productDetail;
+    }
+
+    public Product(String date, String month, String oderName, String marketName, String productPrice, String productState, ProductDetail productDetail) {
+        this.date = date;
+        this.month = month;
+        this.orderName = oderName;
+        this.marketName = marketName;
+        this.productPrice = productPrice;
+        this.productState = productState;
+        this.productDetail = new ProductDetail();
+    }
+
+    public Product(){}
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(int String) {
         this.date = date;
     }
 
-    public int getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
@@ -46,19 +60,19 @@ public class Product
         this.marketName = marketName;
     }
 
-    public String getOderName() {
-        return oderName;
+    public String getOrderName() {
+        return orderName;
     }
 
     public void setOderName(String oderName) {
-        this.oderName = oderName;
+        this.orderName = oderName;
     }
 
-    public float getProductPrice() {
+    public String getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(float productPrice) {
+    public void setProductPrice(String productPrice) {
         this.productPrice = productPrice;
     }
 
@@ -70,21 +84,19 @@ public class Product
         this.productState = productState;
     }
 
-    public String getOrderDetail() {
-        return orderDetail;
+    @Override
+    public int compareTo(Product o) {
+
+        if(this.month.compareTo(o.month)==0){
+            return this.date.compareTo(o.date);
+        }else
+            return this.month.compareTo(o.month);
     }
 
-    public void setOrderDetail(String orderDetail) {
-        this.orderDetail = orderDetail;
+    public String getFormatMonth() throws ParseException {
+        SimpleDateFormat monthParse = new SimpleDateFormat("MM");
+        SimpleDateFormat monthDisplay = new SimpleDateFormat("MMMM");
+        return monthDisplay.format(monthParse.parse(month));
     }
-
-    public String getSummaryPrice() {
-        return summaryPrice;
-    }
-
-    public void setSummaryPrice(String summaryPrice) {
-        this.summaryPrice = summaryPrice;
-    }
-
 
 }

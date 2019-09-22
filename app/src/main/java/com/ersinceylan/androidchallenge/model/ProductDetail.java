@@ -3,7 +3,7 @@ package com.ersinceylan.androidchallenge.model;
 public class ProductDetail {
 
     private String orderDetail;
-    private float summaryPrice;
+    private String summaryPrice;
 
     public String getOrderDetail() {
         return orderDetail;
@@ -13,11 +13,11 @@ public class ProductDetail {
         this.orderDetail = orderDetail;
     }
 
-    public float getSummaryPrice() {
+    public String getSummaryPrice() {
         return summaryPrice;
     }
 
-    public void setSummaryPrice(float summaryPrice) {
+    public void setSummaryPrice(String summaryPrice) {
         this.summaryPrice = summaryPrice;
     }
 
