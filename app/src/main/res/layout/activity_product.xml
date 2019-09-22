@@ -7,7 +7,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_weight="1"
-        android:id="@+id/myRecyclerView"
+        android:id="@+id/product_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
@@ -26,7 +26,6 @@
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
-
             android:layout_height="match_parent">
 
             <Button
@@ -36,9 +35,9 @@
                 android:id="@+id/orders"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
-                android:background="@drawable/circle_button"
+                android:background="@drawable/circle_on_button"
                 android:text="@string/orders"
-                android:textColor="#fff"/>
+                android:textColor="#ff0000"/>
 
         </LinearLayout>
 
