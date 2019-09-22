@@ -2,15 +2,18 @@ package com.ersinceylan.androidchallenge;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.ersinceylan.androidchallenge.Adapter.ProductAdapter;
@@ -26,7 +29,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -49,6 +51,24 @@ public class ProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         ButterKnife.bind(this);
+
+        final ActionBar abar = getSupportActionBar();
+
+        /**
+         * Customize Action Bar
+         */
+        View viewActionBar = getLayoutInflater().inflate(R.layout.action_bar, null);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+        TextView textviewTitle = (TextView) viewActionBar.findViewById(R.id.actionbar_title);
+        textviewTitle.setText("Test");
+        abar.setCustomView(viewActionBar, params);
+        abar.setDisplayShowCustomEnabled(true);
+        abar.setDisplayShowTitleEnabled(false);
+
+
         sharedPref= this.getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
         fetchProductJSON fetchProduct = new fetchProductJSON();
         fetchProduct.execute();
@@ -89,6 +109,9 @@ public class ProductActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /**
+     * JSON body nin çekildiği ve ön yüzün güncellendiği asyntask methodu
+     */
     public class fetchProductJSON extends AsyncTask<Void, Void, Product[]> {
 
         private Product[] products;
@@ -145,22 +168,25 @@ public class ProductActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * http://kariyertechchallenge.mockable.io/ adresinden bilgiyi okur.
+     *
+     * @param urlString http://kariyertechchallenge.mockable.io/ a
+     * @return JSON body
+     */
     private static String getFromUrl(String urlString) throws Exception {
         BufferedReader reader = null;
-        try {
-            URL url = new URL(urlString);
-            reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            StringBuffer buffer = new StringBuffer();
-            int read;
-            char[] chars = new char[1024];
-            while ((read = reader.read(chars)) != -1)
-                buffer.append(chars, 0, read);
 
-            return buffer.toString();
-        } finally {
-            if (reader != null)
-                reader.close();
-        }
+        URL url = new URL(urlString);
+        reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        StringBuffer buffer = new StringBuffer();
+        int read;
+        char[] chars = new char[2048];
+        while ((read = reader.read(chars)) != -1)
+            buffer.append(chars, 0, read);
+
+        return buffer.toString();
+
     }
 
     /**
