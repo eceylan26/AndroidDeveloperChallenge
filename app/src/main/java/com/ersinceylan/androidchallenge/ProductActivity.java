@@ -52,17 +52,6 @@ public class ProductActivity extends AppCompatActivity {
 
         product_recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        ProductAdapter adapter = null;
-        try {
-            adapter = new ProductAdapter(this,initData(fetchProduct.products));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        adapter.setParentClickableViewAnimationDefaultDuration();
-        adapter.setParentAndIconExpandOnClick(true);
-
-        product_recycler.setAdapter(adapter);
-
     }
 
     @OnClick(R.id.logout)
@@ -108,6 +97,18 @@ public class ProductActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Product[] result) {
             super.onPostExecute(result);
+
+            ProductAdapter adapter = null;
+            try {
+                adapter = new ProductAdapter(getBaseContext(),initData(products));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            adapter.setParentClickableViewAnimationDefaultDuration();
+            adapter.setParentAndIconExpandOnClick(true);
+
+            product_recycler.setAdapter(adapter);
+
         }
 
         @Override
@@ -140,6 +141,13 @@ public class ProductActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Recyclerview'e eklenen ürünlerin init ediliği method
+     *
+     * @param productsArray product arrayi
+     * @return UI'da gösterilecek parent bilgilerinin Listesi
+     * @throws ParseException
+     */
     private List<ParentObject> initData(Product[] productsArray) throws ParseException {
 
         List<ParentObject> listParentProducts = new ArrayList<>();
